@@ -4,13 +4,24 @@ from dispositivos import (
     eliminar_dispositivo,
     usar_dispositivo
 )
-from usuarios import registrar_usuario, iniciar_sesion
+from usuarios import registrar_usuario, iniciar_sesion, lista_usuarios,editar_rol_usuario, ver_mi_perfil
 from escenarios import (
     escenarios,
     usar_escenario,
     agregar_escenario,
     escenarios_predefinidos
 )
+
+usuario_actual = None
+usuarios = [{
+        "id_usuario": 1,
+        "email": 'admin@admin.com',
+        "contrasena_hash": 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', # password: 123
+        "nombre": 'admin 1',
+        "rol": "administrador",
+    }]
+dispositivos = []
+
 
 def menu_administrador(dispositivos, escenarios, rol_actual="admin"):
     while True:
@@ -21,7 +32,9 @@ def menu_administrador(dispositivos, escenarios, rol_actual="admin"):
         print("4. Usar y configurar dispositivo")
         print("5. Escenarios")
         print("6. Agregar Escenario")
-        print("7. Cerrar sesión")
+        print("7. Listar usuarios")
+        print("8. Cambiar rol de usuario")
+        print("0. Cerrar sesión")
 
         opcion = input("Seleccione una opción: ")
 
@@ -38,6 +51,10 @@ def menu_administrador(dispositivos, escenarios, rol_actual="admin"):
         elif opcion == '6':
             agregar_escenario(escenarios)
         elif opcion == '7':
+            lista_usuarios(usuarios)
+        elif opcion == '8':
+            editar_rol_usuario(usuarios)
+        elif opcion == '0':
             print("Sesión cerrada.")
             break
         else:
@@ -49,7 +66,8 @@ def menu_invitado(dispositivos, escenarios, rol_actual="invitado"):
         print("1. Listar dispositivos")
         print("2. Usar y configurar dispositivo")
         print("3. Escenarios")
-        print("4. Cerrar sesión")
+        print("4. Datos personales")
+        print("0. Cerrar sesión")
 
         opcion = input("Seleccione una opción: ")
 
@@ -60,15 +78,15 @@ def menu_invitado(dispositivos, escenarios, rol_actual="invitado"):
         elif opcion == '3':
             usar_escenario(escenarios, dispositivos)
         elif opcion == '4':
+            ver_mi_perfil(usuario_actual)
+        elif opcion == '0':
             print("Sesión cerrada.")
             break
         else:
             print("Opción inválida.")
 
 def ejecutar_menu():
-    usuarios = []
-    dispositivos = []
-
+    global usuario_actual
     escenarios.clear()
     escenarios.extend(escenarios_predefinidos)
 
@@ -82,14 +100,16 @@ def ejecutar_menu():
         if opcion == '1':
             registrar_usuario(usuarios)
         elif opcion == '2':
-            usuario = iniciar_sesion(usuarios)
-            if usuario:
-                if usuario["rol"] == "administrador":
+            usuario_actual = iniciar_sesion(usuarios)
+            if usuario_actual:
+                if usuario_actual["rol"] == "administrador":
                     menu_administrador(dispositivos, escenarios, rol_actual="admin")
-                elif usuario["rol"] == "invitado":
+                elif usuario_actual["rol"] == "invitado":
                     menu_invitado(dispositivos, escenarios, rol_actual="invitado")
         elif opcion == '3':
             print("Gracias por usar SmartHome Solutions. ¡Hasta luego!")
             break
         else:
             print("Opción inválida.")
+
+
