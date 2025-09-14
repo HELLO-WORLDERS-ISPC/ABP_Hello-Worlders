@@ -11,3 +11,15 @@ SELECT * FROM ROLES;
 SELECT u.ID_USUARIO, u.NOMBRE, u.LOGIN, r.NOMBRE AS ROL
 FROM USUARIOS u
 JOIN ROLES r ON u.ROL = r.ID_ROL;
+
+INSERT INTO UBICACIONES (NOMBRE, DESCRIPCION) VALUES
+('Cocina', 'Ubicación de la cocina A'),
+('Sala de living', 'Sala del living'),
+('Dormitorio Central', 'Ubicación del dormitorio principal');
+
+INSERT INTO TIPOSDISPOSITIVO (NOMBRE_TIPO, DESCRIPCION) VALUES
+('Luz', 'Luces de la casa'),
+('Camara', 'Camaras de seguridad');
+
+SELECT * FROM UBICACIONES;
+SELECT * FROM TIPOSDISPOSITIVO;
