@@ -1,4 +1,5 @@
 from usuarios import *
+import re
 class SistemaUsuarios:
     def __init__(self):
         self.__usuarios = []
@@ -54,5 +55,5 @@ class SistemaUsuarios:
             if usuario.get_email() == email:
                 usuario.set_rol(nuevo_rol)
                 print(f"Rol de {usuario.get_nombre()} actualizado a {nuevo_rol}.")
-                return
+                return usuario
         print("Usuario no encontrado.")
