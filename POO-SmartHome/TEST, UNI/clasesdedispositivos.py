@@ -4,7 +4,7 @@ class Dispositivo:
         self._ubicacion = ubicacion
         self._nombre = nombre
         self._estado = estado
-
+        
     def get_tipo(self):
         return self._tipo
 
@@ -17,9 +17,9 @@ class Dispositivo:
     def get_estado(self):
         return self._estado
 
+
     def set_estado(self, nuevo_estado):
         if isinstance(nuevo_estado, bool):
             self._estado = nuevo_estado
         else:
-            print("Error: El estado debe(Encendido/Apagado).")
-
+            print("Error: El estado debe ser un valor booleano (Encendido/Apagar).")
