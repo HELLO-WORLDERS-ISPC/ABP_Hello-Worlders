@@ -1,1 +1,1 @@
-Motor de base de datos: 
+Motor de base de datos: Se utilzioa el motro de base de datos Mysql
