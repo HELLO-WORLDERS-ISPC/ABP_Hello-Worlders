@@ -20,7 +20,7 @@ class TestSistemaDispositivos(unittest.TestCase):
         self.sistema = SistemaDispositivos()
 
     def test_agregar_dispositivo(self):
-        dispositivo = self.sistema.agregar_dispositivo("Dispositivo1", "Test", [])
+        dispositivo = self.sistema.agregar_dispositivo("Luz", "Living", "Dispositivo 1", True)       
         self.assertIsNotNone(dispositivo)
         self.assertEqual(dispositivo.get_nombre(), "Dispositivo 1")
 
@@ -31,7 +31,7 @@ class TestSistemaDispositivos(unittest.TestCase):
         self.sistema.listar_dispositivo()
         sys.stdout = sys.__stdout__
         salida = captured_output.getvalue()
-        self.assertIn("Dispositivo1", salida)
+        self.assertIn("Dispositivo 1", salida)
 
     def test_eliminar_dispositivo(self):
         dispositivo = self.sistema.agregar_dispositivo("Eliminar", "", [])

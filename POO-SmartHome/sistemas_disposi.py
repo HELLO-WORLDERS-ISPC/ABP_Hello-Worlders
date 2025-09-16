@@ -5,7 +5,7 @@ class SistemaDispositivos:
         self.__dispositivo = []
 
 
-    def agregar_dispositivo(self,tipo, ubicacion="",nombre="" , estado=None):
+    def agregar_dispositivo(self,tipo, ubicacion="",nombre="" , estado=True):
         dispositivo = Dispositivo(
             tipo=tipo,
             ubicacion=ubicacion,
