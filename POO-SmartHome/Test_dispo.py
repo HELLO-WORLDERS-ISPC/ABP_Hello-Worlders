@@ -25,16 +25,16 @@ class TestSistemaDispositivos(unittest.TestCase):
         self.assertEqual(dispositivo.get_nombre(), "Dispositivo 1")
 
     def test_listar_dispositivos(self):
-        self.sistema.agregar_dispositivo("Dispositivo 1", "Test", [])
+        self.sistema.agregar_dispositivo("Luz", "Test", "Dispositivo 1")
         captured_output = io.StringIO()
         sys.stdout = captured_output
         self.sistema.listar_dispositivo()
-        sys.stdout = sys.__stdout__
+        sys.stdout = sys.stdout
         salida = captured_output.getvalue()
         self.assertIn("Dispositivo 1", salida)
 
     def test_eliminar_dispositivo(self):
-        dispositivo = self.sistema.agregar_dispositivo("Eliminar", "", [])
+        dispositivo = self.sistema.agregar_dispositivo("Luz", "Test", "Eliminar")
         result = self.sistema.eliminar_dispositivo(dispositivo.get_nombre())
         self.assertTrue(result)
         self.assertIsNone(self.sistema.obtener_dispositivo_por_nombre(dispositivo.get_nombre()))
