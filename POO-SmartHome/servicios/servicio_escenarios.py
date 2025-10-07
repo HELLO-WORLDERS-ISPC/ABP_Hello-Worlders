@@ -1,4 +1,4 @@
-from escenarios import Escenario
+from domain.escenarios import Escenario
 
 class SistemaEscenarios:
     def __init__(self):
