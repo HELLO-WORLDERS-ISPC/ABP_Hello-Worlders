@@ -1,4 +1,4 @@
-from usuarios import *
+from domain.usuarios import *
 import re
 class SistemaUsuarios:
     def __init__(self):

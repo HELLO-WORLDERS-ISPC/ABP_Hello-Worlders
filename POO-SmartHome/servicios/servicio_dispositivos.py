@@ -1,4 +1,4 @@
-from clasesdedispositivos import Dispositivo
+from domain.dispositivos import Dispositivo
 
 class SistemaDispositivos:
     def __init__(self):
