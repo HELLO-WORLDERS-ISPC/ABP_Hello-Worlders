@@ -1,25 +1,12 @@
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
 class Dispositivo:
-    def __init__(self, tipo, ubicacion, nombre, estado=True):
-        self._tipo = tipo
-        self._ubicacion = ubicacion
-        self._nombre = nombre
-        self._estado = estado
-        
-    def get_tipo(self):
-        return self._tipo
-
-    def get_ubicacion(self):
-        return self._ubicacion
-
-    def get_nombre(self):
-        return self._nombre
-
-    def get_estado(self):
-        return self._estado
-
-
-    def set_estado(self, nuevo_estado):
-        if isinstance(nuevo_estado, bool):
-            self._estado = nuevo_estado
-        else:
-            print("Error: El estado debe ser un valor booleano (Encendido/Apagar).")
+    id_dispositivo: Optional[int]
+    nombre: str
+    tipo_id: int
+    usuario_id: int
+    ubicacion_id: int
+    accion_id: Optional[int]
+    estado: bool = False
