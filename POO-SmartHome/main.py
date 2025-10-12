@@ -47,7 +47,7 @@ while True:
                 print("Este email ya está registrado.")
             else:
                 nombre = input("Nombre: ")
-                login = input("Login: ")
+                login = input("Usuario: ")
                 contrasena = input("Contraseña: ")
                 usuario = Usuario(None, email, nombre, login, contrasena)
                 usuario_dao.registrar(usuario)

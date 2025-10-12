@@ -5,7 +5,7 @@ INSERT INTO ROLES (NOMBRE, DESCRIPCION) VALUES
 ('Usuario', 'Acceso limitado a sus dispositivos');
 
 
-INSERT INTO USUARIOS (LOGIN, NOMBRE, CLAVE, ROL, EMAIL) VALUES
+INSERT INTO USUARIOS (USUARIO, NOMBRE, CLAVE, ROL, EMAIL) VALUES
 ('admin', 'Sofía Monje', 'admin123', 1, 'sofia.monje@gmail.com'),
 ('user02', 'Carlos Pérez', 'clave02', 2, 'carlos.perez@gmail.com'),
 ('user03', 'Lucía Torres', 'clave03', 2, 'lucia.torres@hotmail.com'),
