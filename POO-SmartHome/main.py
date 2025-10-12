@@ -5,7 +5,7 @@ from domain.usuarios import Usuario
 from domain.dispositivos import Dispositivo
 from domain.escenarios import Escenario
 
-def menu_prinsipal():
+def menu_principal():
     print("""
     === MENÚ PRINCIPAL ===
     1. Registrarse
@@ -17,16 +17,17 @@ def menu_admin():
     === MENÚ ADMINISTRADOR ===
     1. Perfil
     2. Agregar dispositivo
-    3. Crear escenario
-    4. Lista de usuarios
-    5. Cambiar rol
+    3. Listar dispositivos
+    4. Crear escenario
+    5. Lista de usuarios
+    6. Cambiar rol
     0. Cerrar sesion
     """)
 def menu_invitado():
     print("""
     === MENÚ INVITADO ===
     1. Perfil
-    2. Agregar dispositivo
+    2. Listar dispositivos
     0. Cerrar sesion
     """)
 
@@ -38,7 +39,7 @@ if __name__ == "__main__":
 
             
 while True:
-        menu_prinsipal()
+        menu_principal()
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
@@ -68,25 +69,43 @@ while True:
                             usuario_actual.mostrar_perfil()
 
                         elif opcion == "2":
-                                tipo = input("Tipo de dispositivo: ")
-                                ubicacion = input("Ubicación: ")
+                                tipos_dispositivo = dispositivo_dao.listar_tipos_dispositivo()
+                                print("\nTipos de dispositivo:")
+                                for t in tipos_dispositivo:
+                                    print(f"ID: {t.get_id_tipo_dispositivo()} | Nombre: {t.get_nombre_tipo()}")
+                                tipo = int(input("ID Tipo dispositivo: "))
+
+                                ubicaciones = dispositivo_dao.listar_ubicaciones()
+                                print("\nUbicaciones:")
+                                for u in ubicaciones:
+                                    print(f"ID: {u.get_id_ubicacion()} | Nombre: {u.get_nombre()}")
+                                ubicacion = int(input("ID Ubicación: "))
+
                                 nombre = input("Nombre: ")
-                                dispositivo = Dispositivo(tipo, ubicacion, nombre)
+                                id_usuario = usuario_actual.get_id_usuario()
+                                dispositivo = Dispositivo(None, tipo, ubicacion, nombre, id_usuario)
+
                                 dispositivo_dao.agregar_dispositivo(dispositivo)
 
-                        elif opcion == "3":
+                        elif opcion == "3": 
+                            dispositivos = dispositivo_dao.listar_todos_dispositivos()
+                            print("\nLista de dispositivos:")
+                            for d in dispositivos:
+                                print(f"ID: {d.get_id_dispositivo()} | Nombre: {d.get_nombre()} | Tipo: {d.get_tipo()} | Ubicacion: {d.get_ubicacion()} | Estado: {d.get_estado()} | Usuario: {d.get_usuario()}")
+
+                        elif opcion == "4":
                                 nombre = input("Nombre del escenario: ")
                                 descripcion = input("Descripción: ")
                                 escenario = Escenario(None, nombre, descripcion)
                                 escenario_dao.crear_escenario(escenario)
                         
-                        elif opcion == "4": 
+                        elif opcion == "5": 
                             usuarios = usuario_dao.listar_todos_usuarios()
                             print("\nLista de usuarios registrados:")
                             for u in usuarios:
                                 print(f"ID: {u.get_id_usuario()} | Nombre: {u.get_nombre()} | Email: {u.get_email()} | Rol: {u.get_rol()}")
                         
-                        elif opcion == "5":
+                        elif opcion == "6":
                                 id_usuario = input("ID del usuario a modificar: ")
                                 nuevo_rol = int(input("1-Administrador\n2-Invitado\nElige una opcion: "))
                                 usuario_dao.cambiar_rol(id_usuario, nuevo_rol)
@@ -103,13 +122,13 @@ while True:
                         menu_invitado()
                         opcion = input("Seleccione una opción: ")
                         if opcion == "1":
-                          usuario_actual.mostrar_perfil()
-                        elif opcion == "2":
-                                tipo = input("Tipo de dispositivo: ")
-                                ubicacion = input("Ubicación: ")
-                                nombre = input("Nombre: ")
-                                dispositivo = Dispositivo(tipo, ubicacion, nombre)
-                                dispositivo_dao.agregar_dispositivo(dispositivo)
+                            usuario_actual.mostrar_perfil()
+
+                        elif opcion == "2": 
+                            dispositivos = dispositivo_dao.listar_todos_dispositivos()
+                            print("\nLista de dispositivos:")
+                            for d in dispositivos:
+                                print(f"ID: {d.get_id_dispositivo()} | Nombre: {d.get_nombre()} | Tipo: {d.get_tipo()} | Ubicacion: {d.get_ubicacion()} | Estado: {d.get_estado()} | Usuario: {d.get_usuario()}")
 
                         elif opcion == "0":
                             print("Cerrando sesion")
