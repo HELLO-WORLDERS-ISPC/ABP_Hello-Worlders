@@ -44,8 +44,9 @@ while True:
         if opcion == "1":
             email = input("Email: ")
             nombre = input("Nombre: ")
-            contrasena = input("Contraseña: ")
-            usuario = Usuario(None, email, nombre, contrasena)
+            login = input("Usuario:")
+            clave = input("Contraseña: ")
+            usuario = Usuario(email, nombre, clave,2)
             usuario_dao.registrar(usuario)
 
         elif opcion == "2":

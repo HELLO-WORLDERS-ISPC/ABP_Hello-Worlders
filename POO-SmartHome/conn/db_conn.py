@@ -10,9 +10,9 @@ class ConexionDB:
                 database="smart_home"
             )
             if self.connection.is_connected():
-                print("✅ Conexión exitosa a la base de datos MySQL.")
+                print("Conexión exitosa a la base de datos MySQL.")
         except mysql.connector.Error as error:
-            print(f"❌ Error al conectar a la base de datos: {error}")
+            print(f"Error al conectar a la base de datos: {error}")
 
     def get_cursor(self):
         return self.connection.cursor()

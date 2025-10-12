@@ -1,9 +1,9 @@
 class Usuario:
-    def __init__(self, id_usuario, email, nombre, login, contrasena, rol=1):
+    def __init__(self, id_usuario, email, nombre, login, clave, rol=1):
         self.__id_usuario = id_usuario
         self.__email = email
         self.__nombre = nombre
-        self.__contrasena = contrasena
+        self.__clave = clave
         self.__rol = rol
         self.__login = login
 
@@ -30,12 +30,12 @@ class Usuario:
         if nuevo_rol in ["administrador", "invitado"]:
             self.__rol = nuevo_rol
 
-    def verificar_contrasena(self, contrasena):
-        return self.__contrasena == contrasena
+    def verificar_contrasena(self, clave):
+        return self.__clave == clave
 
     def cambiar_contrasena(self, actual, nueva):
         if self.verificar_contrasena(actual):
-            self.__contrasena = nueva
+            self.__clave = nueva
             return True
         return False
 
