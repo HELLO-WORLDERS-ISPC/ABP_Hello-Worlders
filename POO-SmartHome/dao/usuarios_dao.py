@@ -8,8 +8,14 @@ class UsuarioDAO:
     def registrar(self, usuario: Usuario):
         conn = self.db.get_connection()
         cursor = conn.cursor()
-        sql = "INSERT INTO usuarios (email, nombre, clave, rol) VALUES (%s, %s, %s, %s)"
-        cursor.execute(sql, (usuario.get_email(), usuario.get_nombre(), usuario._Usuario__contrasena, usuario.get_rol()))
+        sql = "INSERT INTO usuarios (LOGIN, email, nombre, CLAVE, rol) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(sql, (
+            usuario.get_login(),
+            usuario.get_email(),
+            usuario.get_nombre(),
+            usuario._Usuario__contrasena,
+            usuario.get_rol()
+        ))
         conn.commit()
         print("Usuario registrado correctamente.")
 
