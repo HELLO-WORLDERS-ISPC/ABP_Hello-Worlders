@@ -11,4 +11,4 @@ class EscenarioDAO:
         sql = "INSERT INTO escenarios (nombre, descripcion) VALUES (%s, %s)"
         cursor.execute(sql, (escenario.get_nombre(), escenario.get_descripcion()))
         conn.commit()
-        print("🎯 Escenario creado correctamente.")
+        print("Escenario creado correctamente")
