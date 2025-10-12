@@ -8,7 +8,7 @@ class UsuarioDAO:
     def registrar(self, usuario: Usuario):
         conn = self.db.get_connection()
         cursor = conn.cursor()
-        sql = "INSERT INTO usuarios (LOGIN, email, nombre, CLAVE, rol) VALUES (%s, %s, %s, %s, %s)"
+        sql = "INSERT INTO usuarios (usuario, email, nombre, CLAVE, rol) VALUES (%s, %s, %s, %s, %s)"
         cursor.execute(sql, (
             usuario.get_login(),
             usuario.get_email(),
@@ -26,16 +26,16 @@ class UsuarioDAO:
                  u.ID_USUARIO,
                  u.EMAIL,
                  u.NOMBRE,
-                 u.LOGIN,
+                 u.USUARIO,
                  u.CLAVE,
                  r.NOMBRE AS NOMBRE_ROL
                  FROM USUARIOS u
                  JOIN ROLES r ON u.ROL = r.ID_ROL
-                 WHERE u.LOGIN = %s;"""
+                 WHERE u.USUARIO = %s;"""
         cursor.execute(sql, (login,))
         row = cursor.fetchone()
         if row and row['CLAVE'] == clave:
-            return Usuario( row["ID_USUARIO"], row["EMAIL"], row["NOMBRE"], row["LOGIN"], row["CLAVE"], row["NOMBRE_ROL"])
+            return Usuario( row["ID_USUARIO"], row["EMAIL"], row["NOMBRE"], row["USUARIO"], row["CLAVE"], row["NOMBRE_ROL"])
         return None
 
     def cambiar_rol(self, id_usuario, nuevo_rol):
@@ -51,7 +51,7 @@ class UsuarioDAO:
             cursor = conn.cursor(dictionary=True)
             sql = """SELECT 
                     u.ID_USUARIO,
-                    u.LOGIN,
+                    u.USUARIO,
                     u.NOMBRE AS NOMBRE_USUARIO,
                     u.EMAIL,
                     r.NOMBRE AS NOMBRE_ROL
@@ -62,7 +62,7 @@ class UsuarioDAO:
 
             usuarios = []
             for row in resultados:
-                usuarios.append(Usuario(row['ID_USUARIO'],row['EMAIL'], row['NOMBRE_USUARIO'], row['LOGIN'],None, row['NOMBRE_ROL'])) 
+                usuarios.append(Usuario(row['ID_USUARIO'],row['EMAIL'], row['NOMBRE_USUARIO'], row['USUARIO'],None, row['NOMBRE_ROL'])) 
 
             cursor.close()
             return usuarios
