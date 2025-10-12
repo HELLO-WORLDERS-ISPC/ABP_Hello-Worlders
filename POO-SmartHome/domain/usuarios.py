@@ -1,10 +1,11 @@
 class Usuario:
-    def __init__(self, id_usuario, email, nombre, contrasena, rol="invitado"):
+    def __init__(self, id_usuario, email, nombre, login, clave, rol=1):
         self.__id_usuario = id_usuario
         self.__email = email
         self.__nombre = nombre
-        self.__contrasena = contrasena
+        self.__clave = clave
         self.__rol = rol
+        self.__login = login
 
     def get_id_usuario(self):
         return self.__id_usuario
@@ -17,6 +18,9 @@ class Usuario:
 
     def get_rol(self):
         return self.__rol
+    
+    def get_login(self):
+        return self.__login
 
     def set_nombre(self, nuevo_nombre):
         if nuevo_nombre.strip():
@@ -26,12 +30,12 @@ class Usuario:
         if nuevo_rol in ["administrador", "invitado"]:
             self.__rol = nuevo_rol
 
-    def verificar_contrasena(self, contrasena):
-        return self.__contrasena == contrasena
+    def verificar_contrasena(self, clave):
+        return self.__clave == clave
 
     def cambiar_contrasena(self, actual, nueva):
         if self.verificar_contrasena(actual):
-            self.__contrasena = nueva
+            self.__clave = nueva
             return True
         return False
 
@@ -39,7 +43,14 @@ class Usuario:
         return (f"ID: {self.__id_usuario}, "
                 f"Email: {self.__email}, "
                 f"Nombre: {self.__nombre}, "
-                f"Rol: {self.__rol}")
+                f"Rol: {self.__rol},"
+                f"Login: {self.__login}")
 
+    def mostrar_perfil(self):
+        print("\n=== PERFIL DE USUARIO ===")
+        print(f"Nombre: {self.__nombre}")
+        print(f"Email: {self.__email}")
+        print(f"Usuario: {self.__login}")
+        print(f"Rol: {self.__rol}")
 
 
