@@ -43,11 +43,14 @@ while True:
 
         if opcion == "1":
             email = input("Email: ")
-            nombre = input("Nombre: ")
-            login = input("Login: ")
-            contrasena = input("Contraseña: ")
-            usuario = Usuario(None, email, nombre, login, contrasena)
-            usuario_dao.registrar(usuario)
+            if usuario_dao.existe_email(email):
+                print("Este email ya está registrado.")
+            else:
+                nombre = input("Nombre: ")
+                login = input("Login: ")
+                contrasena = input("Contraseña: ")
+                usuario = Usuario(None, email, nombre, login, contrasena)
+                usuario_dao.registrar(usuario)
 
         elif opcion == "2":
             login = input("usuario: ").strip()

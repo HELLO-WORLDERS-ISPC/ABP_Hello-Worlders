@@ -13,7 +13,7 @@ class UsuarioDAO:
             usuario.get_login(),
             usuario.get_email(),
             usuario.get_nombre(),
-            usuario._Usuario__contrasena,
+            usuario._Usuario__clave,
             usuario.get_rol()
         ))
         conn.commit()
@@ -66,6 +66,15 @@ class UsuarioDAO:
 
             cursor.close()
             return usuarios
+    
+    def existe_email(self, email):
+            conn = self.db.get_connection()
+            cursor = conn.cursor()
+            sql = "SELECT COUNT(*) FROM usuarios WHERE email = %s"
+            cursor.execute(sql, (email,))
+            resultado = cursor.fetchone()
+            cursor.close()
+            return resultado[0] > 0
         
 
 
