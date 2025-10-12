@@ -47,7 +47,7 @@ Este proyecto es un ABP perteneciente al módulo Programador I de la Técnicatur
 
 Aclaraciones:
 
-- Los archivos que no se utilizan más debido a actualizaciones a través de las evidencias NO fueron eliminados. Se encuentran marcados como OBSOLETOS en la estructura.
+- Los archivos que no se utilizan más debido a actualizaciones a través de las evidencias se encuentran marcados como OBSOLETOS en la estructura.
 - El diagrama de clases con su respectiva explicación se encuentra en formato PDF en la carpeta Diagrama-Clases.
 
 ## Autores
