@@ -38,9 +38,9 @@ Este proyecto es un ABP perteneciente al módulo Programador I de la Técnicatur
 │   │   └── usuarios.py
 │   ├── main.py
 │   └── test
-│       ├── test_dispositivos.py
-│       ├── test_escenario.py
-│       └── test_usuario.py
+│       ├── test_dispositivos_dao.py
+│       ├── test_escenarios_dao.py
+│       └── test_usuario_dao.py
 ├── Proyecto funciones (OBSOLETO)
 └── README.md
 ```
