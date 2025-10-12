@@ -25,12 +25,6 @@ class Dispositivo:
     def get_estado(self):
         return self.__estado
 
-    def set_estado(self, nuevo_estado):
-        if isinstance(nuevo_estado, int):
-            self.__estado = nuevo_estado
-        else:
-            print("Error: El estado debe ser un valor entero (1. Apagar/2. Encendido).")
-
 class TipoDispositivo: 
     def __init__(self, id_tipo_dispositivo, nombre_tipo, descripcion):
         self.__id_tipo_dispositivo = id_tipo_dispositivo
