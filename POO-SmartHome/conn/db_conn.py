@@ -16,6 +16,9 @@ class ConexionDB:
 
     def get_cursor(self):
         return self.connection.cursor()
+    
+    def get_connection(self):  
+        return self.connection
 
     def commit(self):
         self.connection.commit()
