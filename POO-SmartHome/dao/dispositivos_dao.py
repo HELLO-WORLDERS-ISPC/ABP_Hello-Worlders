@@ -47,28 +47,58 @@ class DispositivoDAO:
             ubicaciones.append(Ubicacion(row['ID_UBICACION'],row['NOMBRE'], row['DESCRIPCION']))
 
         return ubicaciones
-    
+     
     def listar_todos_dispositivos(self):
         conn = self.db.get_connection()
         cursor = conn.cursor(dictionary=True)
-        sql = """SELECT 
+        sql = """
+            SELECT 
                 d.ID_DISPOSITIVO,
-                d.NOMBRE_DISPOSITIVO,
-                a.ACCION_DETALLE AS ACCION,
                 t.NOMBRE_TIPO AS TIPO,
+                ub.NOMBRE AS UBICACION,
+                d.NOMBRE_DISPOSITIVO AS NOMBRE,
                 u.NOMBRE AS USUARIO,
-                ub.NOMBRE AS UBICACION
-                FROM DISPOSITIVOS d
-                JOIN ESTADODISPOSITIVO a ON d.ID_ACCION = a.ID_ACCION
-                JOIN TIPOSDISPOSITIVO t ON d.ID_TIPO_DISPOSITIVO = t.ID_TIPO_DISPOSITIVO
-                JOIN USUARIOS u ON d.ID_USUARIO = u.ID_USUARIO
-                JOIN UBICACIONES ub ON d.ID_UBICACION = ub.ID_UBICACION;"""
+                a.ACCION_DETALLE AS ESTADO
+            FROM DISPOSITIVOS d
+            JOIN TIPOSDISPOSITIVO t ON d.ID_TIPO_DISPOSITIVO = t.ID_TIPO_DISPOSITIVO
+            JOIN UBICACIONES ub ON d.ID_UBICACION = ub.ID_UBICACION
+            JOIN USUARIOS u ON d.ID_USUARIO = u.ID_USUARIO
+            JOIN ESTADODISPOSITIVO a ON d.ID_ACCION = a.ID_ACCION;
+        """
         cursor.execute(sql)
         resultados = cursor.fetchall()
+        cursor.close()
 
         dispositivos = []
         for row in resultados:
-            dispositivos.append(Dispositivo(row['ID_DISPOSITIVO'],row['NOMBRE_DISPOSITIVO'], row['ACCION'], row['TIPO'], row['USUARIO'], row['UBICACION'])) 
+            dispositivos.append(
+                Dispositivo(
+                    row['ID_DISPOSITIVO'],
+                    row['TIPO'],
+                    row['UBICACION'],
+                    row['NOMBRE'],
+                    row['USUARIO'],
+                    row['ESTADO']
+                )
+            )
 
-        cursor.close()
         return dispositivos
+
+    
+    def editar_estado_dispositivo(self, id_dispositivo, nuevo_estado):
+        conn = self.db.get_connection()
+        cursor = conn.cursor()
+        sql = "UPDATE dispositivos SET ID_ACCION = %s WHERE ID_DISPOSITIVO = %s"
+        cursor.execute(sql, (nuevo_estado, id_dispositivo))
+        conn.commit()
+        cursor.close()
+        print("Estado del dispositivo actualizado correctamente")
+    
+    def eliminar_dispositivo(self, id_dispositivo):
+        conn = self.db.get_connection()
+        cursor = conn.cursor()
+        sql = "DELETE FROM dispositivos WHERE ID_DISPOSITIVO = %s"
+        cursor.execute(sql, (id_dispositivo,))
+        conn.commit()
+        cursor.close()
+        print("Dispositivo eliminado correctamente")
