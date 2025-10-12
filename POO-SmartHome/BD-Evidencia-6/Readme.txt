@@ -1,5 +1,7 @@
 Documentación Técnica – Configuración de la Base de Datos
 
+Dejo el link de acceso al onecompliter https://onecompiler.com/mysql/43wm4g2ch
+
 Motor de Base de Datos
 El sistema utiliza como motor de base de datos MySQL, seleccionado por su estabilidad, soporte multiplataforma y compatibilidad con múltiples lenguajes de programación, entre ellos Python. MySQL permite una administración eficiente de datos estructurados, relaciones entre entidades, y escalabilidad para proyectos de tipo académico o productivo.
 
