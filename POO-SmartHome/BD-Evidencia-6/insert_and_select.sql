@@ -2,7 +2,7 @@ USE smart_home;
 
 INSERT INTO ROLES (NOMBRE, DESCRIPCION) VALUES
 ('Administrador', 'Acceso total al sistema'),
-('Usuario', 'Acceso limitado a sus dispositivos');
+('Invitado', 'Acceso limitado a sus dispositivos');
 
 
 INSERT INTO USUARIOS (USUARIO, NOMBRE, CLAVE, ROL, EMAIL) VALUES
