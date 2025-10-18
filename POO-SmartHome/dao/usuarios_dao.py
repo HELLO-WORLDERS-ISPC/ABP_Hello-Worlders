@@ -1,5 +1,6 @@
 from conn.db_conn import ConexionDB
 from domain.usuarios import Usuario
+import re 
 
 class UsuarioDAO:
     def __init__(self):
@@ -18,6 +19,7 @@ class UsuarioDAO:
         ))
         conn.commit()
         print("Usuario registrado correctamente.")
+        cursor.close()
 
     def login(self, login, clave):
         conn = self.db.get_connection()
@@ -36,6 +38,7 @@ class UsuarioDAO:
         row = cursor.fetchone()
         if row and row['CLAVE'] == clave:
             return Usuario( row["ID_USUARIO"], row["EMAIL"], row["NOMBRE"], row["USUARIO"], row["CLAVE"], row["NOMBRE_ROL"])
+        cursor.close()
         return None
 
     def cambiar_rol(self, id_usuario, nuevo_rol):
@@ -45,6 +48,7 @@ class UsuarioDAO:
         cursor.execute(sql, (nuevo_rol, id_usuario))
         conn.commit()
         print("Rol actualizado correctamente.")
+        cursor.close()
         
     def listar_todos_usuarios(self):
             conn = self.db.get_connection()
@@ -77,6 +81,10 @@ class UsuarioDAO:
             resultado = cursor.fetchone()
             cursor.close()
             return resultado[0] > 0
+        
+    def es_email_valido(self,email):
+        patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        return re.match(patron, email)
         
 
 

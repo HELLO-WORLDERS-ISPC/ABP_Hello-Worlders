@@ -6,6 +6,7 @@ from domain.dispositivos import Dispositivo
 from domain.escenarios import Escenario
 
 
+
 def menu_principal():
     print("""
     === MENÚ PRINCIPAL ===
@@ -51,15 +52,21 @@ while True:
     opcion = input("Seleccione una opción: ")
 
     if opcion == "1":
-        email = input("Email: ")
-        if usuario_dao.existe_email(email):
-            print("Este email ya está registrado.")
+        email = input("Email: ").strip().lower()
+        if not usuario_dao.es_email_valido (email):
+            print("Error: El email no tiene un formato válido (ejemplo: usuario@dominio.com).")
         else:
-            nombre = input("Nombre: ")
-            login = input("Usuario: ")
-            contrasena = input("Contraseña: ")
-            usuario = Usuario(None, email, nombre, login, contrasena)
-            usuario_dao.registrar(usuario)
+            if usuario_dao.existe_email(email):
+                print("Este email ya está registrado.")
+            else:
+                nombre = input("Nombre: ").strip()
+                login = input("Usuario: ").strip()
+                contrasena = input("Contraseña: ").strip()
+                if not nombre or not login or not contrasena:
+                    print("Error: el nombre, usuario y la contraseña son obligatorios.")
+                else:
+                    usuario = Usuario(None, email, nombre, login, contrasena)
+                    usuario_dao.registrar(usuario)
 
     elif opcion == "2":
         login = input("usuario: ").strip()
@@ -161,6 +168,11 @@ while True:
                             f"ID: {u.get_id_usuario()} | Nombre: {u.get_nombre()} | Email: {u.get_email()} | Rol: {u.get_rol()}")
 
                 elif opcion == "8":
+                    usuarios = usuario_dao.listar_todos_usuarios()
+                    print("\nLista de usuarios registrados:")
+                    for u in usuarios:
+                        print(
+                            f"ID: {u.get_id_usuario()} | Nombre: {u.get_nombre()} | Email: {u.get_email()} | Rol: {u.get_rol()}")
                     id_usuario = input("ID del usuario a modificar: ")
                     nuevo_rol = int(
                         input("1-Administrador\n2-Invitado\nElige una opcion: "))
