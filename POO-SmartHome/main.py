@@ -201,7 +201,7 @@ while True:
 
                 else:
                     print("Opción inválida.")
-        elif rol == "Usuario":
+        elif rol == "Invitado":
             print(f"Bienvenido {usuario_actual.get_nombre()} Rol Invitado")
             while True:
                 menu_invitado()

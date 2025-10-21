@@ -63,9 +63,7 @@ class UsuarioDAO:
                     JOIN ROLES r ON u.ROL = r.ID_ROL;"""
             cursor.execute(sql)
             resultados = cursor.fetchall()
-
-            print(resultados)
-
+            
             usuarios = []
             for row in resultados:
                 usuarios.append(Usuario(row['ID_USUARIO'],row['EMAIL'], row['NOMBRE_USUARIO'], row['USUARIO'],None, row['NOMBRE_ROL'])) 
