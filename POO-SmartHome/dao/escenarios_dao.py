@@ -1,7 +1,8 @@
 from conn.db_conn import ConexionDB
 from domain.escenarios import Escenario
+from dao.interfaces.i_escenarios_dao import IEscenarioDAO
 
-class EscenarioDAO:
+class EscenarioDAO(IEscenarioDAO):
     def __init__(self):
         self.db = ConexionDB()
 
