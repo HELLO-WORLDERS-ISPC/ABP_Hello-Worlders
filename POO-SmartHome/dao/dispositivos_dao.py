@@ -1,7 +1,8 @@
 from conn.db_conn import ConexionDB
 from domain.dispositivos import Dispositivo, TipoDispositivo, Ubicacion
+from dao.interfaces.i_dispositivos_dao import IDispositivoDAO
 
-class DispositivoDAO:
+class DispositivoDAO(IDispositivoDAO):
     def __init__(self):
         self.db = ConexionDB()
 

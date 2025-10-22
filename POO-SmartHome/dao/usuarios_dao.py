@@ -1,8 +1,9 @@
 from conn.db_conn import ConexionDB
 from domain.usuarios import Usuario
 import re 
+from dao.interfaces.i_usuarios_dao import IUsuarioDAO
 
-class UsuarioDAO:
+class UsuarioDAO(IUsuarioDAO):
     def __init__(self):
         self.db = ConexionDB()
 
