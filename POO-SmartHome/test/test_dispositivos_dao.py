@@ -41,7 +41,7 @@ class TestDispositivoDAO(unittest.TestCase):
 
     def test_listar_dispositivos_devuelve_lista(self):
         self.mock_cursor.fetchall.return_value = [
-            {'ID_DISPOSITIVO': 1, 'NOMBRE': 'Sensor', 'USUARIO': 'User'}
+            {'ID_DISPOSITIVO': 1, 'NOMBRE': 'Sensor','ESTADO':'Encendido','TIPO':'LUZ','USUARIO': 'User','UBICACION':'Cocina'}
         ]
         dispositivos = self.dao.listar_todos_dispositivos()
         self.assertIsInstance(dispositivos, list)

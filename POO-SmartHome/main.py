@@ -155,10 +155,12 @@ while True:
                             print("Operación cancelada.")
                                 
                 elif opcion == "6":
-                    nombre = input("Nombre del escenario: ")
-                    descripcion = input("Descripción: ")
-                    escenario = Escenario(None, nombre, descripcion)
-                    escenario_dao.crear_escenario(escenario)
+                    print("Esta opción se implementara en el siguietne modulo")
+                    #nombre = input("Nombre del escenario: ")
+                    #descripcion = input("Descripción: ")
+                    ##escenario = Escenario(None, nombre, descripcion)
+                    #escenario_dao.crear_escenario(escenario)
+                    continue
 
                 elif opcion == "7":
                     usuarios = usuario_dao.listar_todos_usuarios()
