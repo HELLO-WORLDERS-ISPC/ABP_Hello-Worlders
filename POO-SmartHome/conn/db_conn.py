@@ -6,7 +6,7 @@ class ConexionDB:
             self.connection = mysql.connector.connect(
                 host="localhost",
                 user="root",
-                password="adminR00t",
+                password="R00t",
                 database="smart_home"
             )
             if self.connection.is_connected():

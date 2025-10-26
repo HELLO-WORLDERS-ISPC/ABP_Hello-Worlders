@@ -7,7 +7,7 @@ from domain.usuarios import Usuario
 
 class IUsuarioDAO(ABC):
     @abstractmethod
-    def registrar(self, usuario: Usuario) -> None:
+    def registrar(self, usuario: str) -> None:
         pass
 
     @abstractmethod
