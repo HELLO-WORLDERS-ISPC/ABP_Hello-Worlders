@@ -52,21 +52,44 @@ while True:
     opcion = input("Seleccione una opción: ")
 
     if opcion == "1":
-        email = input("Email: ").strip().lower()
-        if not usuario_dao.es_email_valido (email):
-            print("Error: El email no tiene un formato válido (ejemplo: usuario@dominio.com).")
-        else:
+        while True:
+            email = input("Email: ").strip().lower()
+            if not email:
+                print("El campo email no puede estar vacío. Intente nuevamente.")
+                continue
+            if not usuario_dao.es_email_valido(email):
+                print("El email no tiene un formato válido (ejemplo: usuario@dominio.com).")
+                continue
             if usuario_dao.existe_email(email):
-                print("Este email ya está registrado.")
+                print("Este email ya está registrado. Ingrese uno diferente.")
+                continue
+            break  
+
+        while True:
+            nombre = input("Nombre: ").strip()
+            if not nombre:
+                print("El nombre no puede estar vacío. Intente nuevamente.")
             else:
-                nombre = input("Nombre: ").strip()
-                login = input("Usuario: ").strip()
-                contrasena = input("Contraseña: ").strip()
-                if not nombre or not login or not contrasena:
-                    print("Error: el nombre, usuario y la contraseña son obligatorios.")
-                else:
-                    usuario = Usuario(None, email, nombre, login, contrasena)
-                    usuario_dao.registrar(usuario)
+                break
+        while True:
+            login = input("Usuario: ").strip()
+            if not login:
+                print("El nombre de usuario no puede estar vacío. Intente nuevamente.")
+            else:
+                break
+        while True:
+            contrasena = input("Contraseña: ").strip()
+            if not contrasena:
+                print("La contraseña no puede estar vacía. Intente nuevamente.")
+            elif len(contrasena) < 4:
+                print("La contraseña debe tener al menos 4 caracteres.")
+            else:
+                break
+
+        usuario = Usuario(None, email, nombre, login, contrasena)
+        usuario_dao.registrar(usuario)
+        print("Usuario registrado correctamente.")
+
 
     elif opcion == "2":
         login = input("usuario: ").strip()
@@ -91,24 +114,44 @@ while True:
                     tipos_dispositivo = dispositivo_dao.listar_tipos_dispositivo()
                     print("\nTipos de dispositivo:")
                     for t in tipos_dispositivo:
-                        print(
-                            f"ID: {t.get_id_tipo_dispositivo()} | Nombre: {t.get_nombre_tipo()}")
-                    tipo = int(input("ID Tipo dispositivo: "))
+                        print(f"ID: {t.get_id_tipo_dispositivo()} | Nombre: {t.get_nombre_tipo()}")
+
+                    while True:
+                        tipo_input = input("ID Tipo dispositivo: ").strip()
+                        if not tipo_input:
+                            print("El campo no puede estar vacío. Intente nuevamente.")
+                        elif not tipo_input.isdigit():
+                            print("Debe ingresar un número válido.")
+                        else:
+                            tipo = int(tipo_input)
+                            break
 
                     ubicaciones = dispositivo_dao.listar_ubicaciones()
                     print("\nUbicaciones:")
                     for u in ubicaciones:
-                        print(
-                            f"ID: {u.get_id_ubicacion()} | Nombre: {u.get_nombre()}")
-                    ubicacion = int(input("ID Ubicación: "))
+                        print(f"ID: {u.get_id_ubicacion()} | Nombre: {u.get_nombre()}")
 
-                    nombre = input("Nombre: ")
+                    while True:
+                        ubicacion_input = input("ID Ubicación: ").strip()
+                        if not ubicacion_input:
+                            print("El campo no puede estar vacío. Intente nuevamente.")
+                        elif not ubicacion_input.isdigit():
+                            print("Debe ingresar un número válido.")
+                        else:
+                            ubicacion = int(ubicacion_input)
+                            break
+
+                    while True:
+                        nombre = input("Nombre: ").strip()
+                        if not nombre:
+                            print("El nombre no puede estar vacío. Intente nuevamente.")
+                        else:
+                            break
+
                     id_usuario = usuario_actual.get_id_usuario()
-                    dispositivo = Dispositivo(
-                        None, tipo, ubicacion, nombre, id_usuario)
-
+                    dispositivo = Dispositivo(None, tipo, ubicacion, nombre, id_usuario)
                     dispositivo_dao.agregar_dispositivo(dispositivo)
-
+                    
                 elif opcion == "3":
                     dispositivos = dispositivo_dao.listar_todos_dispositivos()
                     print("\nLista de dispositivos:")
@@ -155,10 +198,12 @@ while True:
                             print("Operación cancelada.")
                                 
                 elif opcion == "6":
-                    nombre = input("Nombre del escenario: ")
-                    descripcion = input("Descripción: ")
-                    escenario = Escenario(None, nombre, descripcion)
-                    escenario_dao.crear_escenario(escenario)
+                    print("Esta opción se implementara en el siguietne modulo")
+                    #nombre = input("Nombre del escenario: ")
+                    #descripcion = input("Descripción: ")
+                    ##escenario = Escenario(None, nombre, descripcion)
+                    #escenario_dao.crear_escenario(escenario)
+                    continue
 
                 elif opcion == "7":
                     usuarios = usuario_dao.listar_todos_usuarios()

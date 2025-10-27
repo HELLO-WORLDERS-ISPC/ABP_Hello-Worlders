@@ -8,7 +8,7 @@ class FakeUsuario:
         self.__email = email
         self.__nombre = nombre
         self.__login = login
-        self.__clave = clave
+        self._Usuario__clave = clave
         self.__rol = rol
 
     def get_login(self): return self.__login

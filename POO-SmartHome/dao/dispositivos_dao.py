@@ -64,7 +64,8 @@ class DispositivoDAO(IDispositivoDAO):
             JOIN TIPOSDISPOSITIVO t ON d.ID_TIPO_DISPOSITIVO = t.ID_TIPO_DISPOSITIVO
             JOIN UBICACIONES ub ON d.ID_UBICACION = ub.ID_UBICACION
             JOIN USUARIOS u ON d.ID_USUARIO = u.ID_USUARIO
-            JOIN ESTADODISPOSITIVO a ON d.ID_ACCION = a.ID_ACCION;
+            JOIN ESTADODISPOSITIVO a ON d.ID_ACCION = a.ID_ACCION 
+            ORDER BY ID_DISPOSITIVO ASC;
         """
         cursor.execute(sql)
         resultados = cursor.fetchall()

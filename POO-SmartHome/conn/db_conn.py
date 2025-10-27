@@ -26,4 +26,4 @@ class ConexionDB:
     def close(self):
         if self.connection.is_connected():
             self.connection.close()
-            print("🔌 Conexión cerrada correctamente.")
+            print("Conexión cerrada correctamente.")
