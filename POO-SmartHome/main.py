@@ -36,6 +36,8 @@ def menu_invitado():
     === MENÚ INVITADO ===
     1. Perfil
     2. Listar dispositivos
+    3. Agregar dispositivo
+    4. Cambiar estado del dispositivo
     0. Cerrar sesion
     """)
 
@@ -261,6 +263,70 @@ while True:
                         print(
                             f"ID: {d.get_id_dispositivo()} | Nombre: {d.get_nombre()} | Tipo: {d.get_tipo()} | Ubicacion: {d.get_ubicacion()} | Estado: {d.get_estado()} | Usuario: {d.get_usuario()}")
 
+                elif opcion == "3":
+                    tipos_dispositivo = dispositivo_dao.listar_tipos_dispositivo()
+                    print("\nTipos de dispositivo:")
+                    for t in tipos_dispositivo:
+                        print(f"ID: {t.get_id_tipo_dispositivo()} | Nombre: {t.get_nombre_tipo()}")
+
+                    while True:
+                        tipo_input = input("ID Tipo dispositivo: ").strip()
+                        if not tipo_input:
+                            print("El campo no puede estar vacío. Intente nuevamente.")
+                        elif not tipo_input.isdigit():
+                            print("Debe ingresar un número válido.")
+                        else:
+                            tipo = int(tipo_input)
+                            break
+
+                    ubicaciones = dispositivo_dao.listar_ubicaciones()
+                    print("\nUbicaciones:")
+                    for u in ubicaciones:
+                        print(f"ID: {u.get_id_ubicacion()} | Nombre: {u.get_nombre()}")
+
+                    while True:
+                        ubicacion_input = input("ID Ubicación: ").strip()
+                        if not ubicacion_input:
+                            print("El campo no puede estar vacío. Intente nuevamente.")
+                        elif not ubicacion_input.isdigit():
+                            print("Debe ingresar un número válido.")
+                        else:
+                            ubicacion = int(ubicacion_input)
+                            break
+
+                    while True:
+                        nombre = input("Nombre: ").strip()
+                        if not nombre:
+                            print("El nombre no puede estar vacío. Intente nuevamente.")
+                        else:
+                            break
+
+                    id_usuario = usuario_actual.get_id_usuario()
+                    dispositivo = Dispositivo(None, tipo, ubicacion, nombre, id_usuario)
+                    dispositivo_dao.agregar_dispositivo(dispositivo)
+                
+                elif opcion == "4":
+                    dispositivos = dispositivo_dao.listar_todos_dispositivos()
+                    if not dispositivos:
+                        print("No hay dispositivos registrados.")
+                    else:
+                        print("\n=== Lista de dispositivos ===")
+                        for d in dispositivos:
+                            print(f"ID: {d.get_id_dispositivo()} | Nombre: {d.get_nombre()} | Estado: {d.get_estado()}")
+
+                        id_dispositivo = input("Ingrese el ID del dispositivo a modificar: ")
+                        print("\n=== Estados disponibles ===")
+                        cursor = dispositivo_dao.db.get_connection().cursor(dictionary=True)
+                        cursor.execute("SELECT ID_ACCION, ACCION_DETALLE FROM ESTADODISPOSITIVO")
+                        estados = cursor.fetchall()
+                        for e in estados:
+                            print(f"{e['ID_ACCION']} - {e['ACCION_DETALLE']}")
+                        cursor.close()
+
+                        nuevo_estado = input("Ingrese el ID del nuevo estado: ")
+                        dispositivo_dao.editar_estado_dispositivo(id_dispositivo, nuevo_estado)
+                
+                
                 elif opcion == "0":
                     print("Cerrando sesion")
                     break
